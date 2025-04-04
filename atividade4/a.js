@@ -2,7 +2,7 @@ const itens = [];
 
 function adicionar(item){
 
-    if(validar_item_a_cadastrar(item)){
+    if(item_cadastrar(item)){
         itens.push(item);
         return true;
     }
@@ -23,14 +23,14 @@ module.exports = {
     editar
 }
 
-function is_numerico(n){
+function numero(n){
     if(isNaN(n) || n == null){
         return false;
     }
     return true;
 }
 
-function is_id_cadastrado(id){
+function id_cadastrado(id){
     for(let indice in itens) {
         let item_cadastrado = itens[indice];
         if(item_cadastrado.id == id){
@@ -40,18 +40,18 @@ function is_id_cadastrado(id){
     return false;
 }
 
-function validar_item_a_cadastrar(item){
+function item_cadastrar(item){
     let item_valido = true;
     
-    if(!is_numerico(item.id) || item.id <= 0){
+    if(!numero(item.id) || item.id <= 0){
         item_valido = false;
     }
 
-    if(is_id_cadastrado(item.id)){
+    if(id_cadastrado(item.id)){
         item_valido = false;
     }
 
-    if(!is_numerico(item.qtd) || item.qtd < 0){
+    if(!numero(item.qtd) || item.qtd < 0){
         item_valido = false;
     }
 
@@ -64,15 +64,15 @@ function validar_item_a_cadastrar(item){
 
 function editar_item(id, qtd){
     console.log(`${id} - ${qtd}`);
-    if(!is_numerico(id) || id == 0){
+    if(!numero(id) || id == 0){
         console.log('id invalido');
         return false;
     }
-    if(!is_id_cadastrado(id)){
+    if(!id_cadastrado(id)){
         console.log('id n cadastrado');
         return false;
     }
-    if(!is_numerico(qtd) || qtd < 0){
+    if(!numero(qtd) || qtd < 0){
         console.log('qtd invalido');
         return false;
     }
